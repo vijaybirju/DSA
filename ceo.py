@@ -40,7 +40,7 @@ class TreeNode:
 
 def build_company_tree():
 
-    root=TreeNode("Nilupul","CEO")
+    ceo=TreeNode("Nilupul","CEO")
 
     Chinamay = TreeNode('Chinmay','CTO')
     
@@ -59,18 +59,18 @@ def build_company_tree():
 
 
 
-    root.add_child(Chinamay)
-    root.add_child(Gels)
+    ceo.add_child(Chinamay)
+    ceo.add_child(Gels)
 
-    return root
+    return ceo
 
 
 
 
 if __name__ == '__main__':
-    root_node = build_company_tree()
-    root_node.print_tree("name") # prints only name hierarchy
-    root_node.print_tree("designation") # prints only designation hierarchy
-    root_node.print_tree("both") # prints both (name and designation) hierarchy
+    ceo_node = build_company_tree()
+    ceo_node.print_tree("name") # prints only name hierarchy
+    ceo_node.print_tree("designation") # prints only designation hierarchy
+    ceo_node.print_tree("both") # prints both (name and designation) hierarchy
 
         
