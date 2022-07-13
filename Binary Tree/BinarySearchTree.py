@@ -1,3 +1,5 @@
+
+
 class BinarySearchTree:
     def __init__(self,data) :
         self.data=data
@@ -90,9 +92,22 @@ class BinarySearchTree:
         for i in range(0,len(elements)):
             element+=elements[i]
         return element
-
     
-        
+    def delete(self,number):
+        self.number=number
+
+        if number<self.data:
+            if self.left:
+                self.left.delete(number)
+            else:
+                return None
+        elif number>self.data():
+            if self.right:
+                self.right.delete(number)
+            else:
+                return None
+        else:
+            return None
 
 
 
@@ -110,7 +125,7 @@ def build_tree(elements):
 
 
 if __name__=='__main__':
-    numbers= [ 87,45,67,24,56,78,89,90,876,-123,2,1,4,5,6,7,8,90,67,5,4,56,7,87,89,2 ]
+    numbers= [ 87,45,67,24,56,78,89,90,876,-123,2,1,8,90,67,56,87,89,2 ]
     root=build_tree(numbers)
     print("in order trasversal",root.in_order_transversal())
     print(root.search(0))
@@ -118,4 +133,6 @@ if __name__=='__main__':
     print(root.find_max())
     print(root.calculate_sum())
     print("pre order transversal",root.pre_order_traversal())
+    print(root.delete(24))
+    print("in order trasversal",root.in_order_transversal())
     pass
