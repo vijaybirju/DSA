@@ -78,13 +78,15 @@ class BinarySearchTree:
         
 
     def find_min(self):
-        elements=self.in_order_transversal()
-        return elements[0]
+        if self.left is None:
+            return self.data
+        return self.left.find_min()
 
 
     def find_max(self):
-        elements=self.in_order_transversal()
-        return elements[len(elements)-1]
+        if self.right is None:
+            return self.data
+        return self.right.find_max()
 
     def calculate_sum(self):
         elements = self.in_order_transversal()
@@ -94,22 +96,29 @@ class BinarySearchTree:
         return element
     
     def delete(self,number):
-        self.number=number
-
         if number<self.data:
             if self.left:
-                self.left.delete(number)
-            else:
-                return None
-        elif number>self.data():
+                self.left=self.left.delete(number)
+        elif number>self.data:
             if self.right:
-                self.right.delete(number)
-            else:
-                return None
+                self.right=self.right.delete(number)
         else:
-            return None
+            if self.left is None and self.right is None :
+                return None
+            if self.right is None:
+                return self.left
+            if self.left is None:
+                return self.right
+            
+            # Find minimum from left subtree and paste in place of node
+            #min_val=self.right.find_min()
+            #self.data=min_val
+            #self.right=self.right.delete(min_val)
 
-
+            max_val=self.left.find_max()
+            self.data=max_val
+            self.left=self.left.delete(max_val)
+        return self   
 
 
 def build_tree(elements):
@@ -125,14 +134,15 @@ def build_tree(elements):
 
 
 if __name__=='__main__':
-    numbers= [ 87,45,67,24,56,78,89,90,876,-123,2,1,8,90,67,56,87,89,2 ]
+    #numbers= [ 87,45,67,24,56,78,89,90,876,-123,2,1,8,90,67,56,87,89,2 ]
+    numbers=["Ajay","vijay",'abhishek','chintu','neetu','manish','mom','dad']
     root=build_tree(numbers)
     print("in order trasversal",root.in_order_transversal())
-    print(root.search(0))
-    print(root.find_min())
-    print(root.find_max())
-    print(root.calculate_sum())
+    #print(root.search(0))
+    print('min:',root.find_min())
+    #print("max:",root.find_max())
+    #print(root.calculate_sum())
     print("pre order transversal",root.pre_order_traversal())
-    print(root.delete(24))
-    print("in order trasversal",root.in_order_transversal())
+    print(root.delete('Ajay'))
+    print("in after delete",root.in_order_transversal())
     pass
