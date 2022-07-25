@@ -21,6 +21,18 @@ class Graph:
         else:
             print(f'sorry there is no flight from {start}')
 
+    def check_path(self,start,end , path=[]):
+        path=path + [start]
+        if start == end :
+            return path
+        if start in self.edges_graph:
+            if end in self.edges_graph[start]:
+                return path 
+            else:
+                pass
+        else:
+            return f"no path {[]}"
+
 
 
 if __name__=='__main__':
@@ -34,4 +46,7 @@ if __name__=='__main__':
     ]
 
     route_graph=Graph(routes)
-    route_graph.paths('Mumbai')
+    #route_graph.paths('Mumbai')
+    start='Toronto'
+    end='Mumbai'
+    print(f'The path between {start} to {end} is',route_graph.check_path('Toronto','Mumbai'))
