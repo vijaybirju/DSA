@@ -24,16 +24,16 @@ class Graph:
     def check_path(self,start,end , path=[]):
         path=path + [start]
         if start == end :
-            return path
-        if start in self.edges_graph:
-            if end in self.edges_graph[start]:
-                return path 
-            else:
-                pass
-        else:
-            return f"no path {[]}"
-
-
+            return [path]
+        if start  not in self.edges_graph:
+                return []
+        paths=[]
+        for node in self.edges_graph[start]:
+            if node not in path:
+                new_path = self.check_path(node,end,path)
+                for p in new_path:
+                    paths.append(p)
+        return paths
 
 if __name__=='__main__':
     routes = [
@@ -47,6 +47,6 @@ if __name__=='__main__':
 
     route_graph=Graph(routes)
     #route_graph.paths('Mumbai')
-    start='Toronto'
-    end='Mumbai'
-    print(f'The path between {start} to {end} is',route_graph.check_path('Toronto','Mumbai'))
+    start='Mumbai'
+    end='Newyork'
+    print(f'The path between {start} to {end} is',route_graph.check_path(start,end))
